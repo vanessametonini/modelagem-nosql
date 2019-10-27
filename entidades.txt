@@ -1,0 +1,56 @@
+produção: 
+  título, 
+  ano da produção, 
+  duração, 
+  classificação etária, 
+  países envolvidos na produção, 
+  empresa produtora, 
+  nota média de avaliação por usuarios
+  opiniões de usuarios
+
+  tipo:
+    videoclipe:
+      música,
+      cantor (ou cantores, no caso de um grupo musical)
+      gênero (rock, samba, funk, etc.)
+      diretores
+      
+    filmes:
+      bilheteria (total de espectadores que assistiram o filme)
+      faturamento
+      sequência de outro filme
+      personagens
+      categorias (drama, comédia, romance, musical, etc.), 
+      diretores
+      atores
+
+    séries:
+      temporadas
+        episódios
+          personagens
+          atores
+          diretores
+      diretores principais
+
+artistas 
+  nome, 
+  data de nascimento 
+  local de nascimento, 
+  mini biografia 
+  data de morte
+  tipo: ator, músico, diretor
+    
+usuários:
+  username
+  nome
+  email
+  avaliacoes feitas
+  score
+
+avaliacao
+  nota
+  comentário
+ 
+comentário
+  nota
+  
