@@ -111,7 +111,7 @@
 % ---
 % Informações de dados para CAPA e FOLHA DE ROSTO
 % ---
-\titulo{Modeloo Canônico de\\ Relatório Técnico e/ou Científico com \abnTeX}
+\titulo{Modelo Canônico de\\ Relatório Técnico e/ou Científico com \abnTeX}
 \autor{Equipe \abnTeX}
 \local{Brasil}
 \data{2018, v-1.9.7}
@@ -289,14 +289,26 @@ Lauro César Araujo
 A Tarefa é projetar um ou mais esquemas de BD NoSQL para armazenar os dados de forma
 a atender eficientemente os requisitos 
  
-
-
 % ---
 % Finaliza a parte no bookmark do PDF
 % para que se inicie o bookmark na raiz
 % e adiciona espaço de parte no Sumário
 % ---
 \phantompart
+
+\chapter{Diagrama UML}
+
+\begin{tikzpicture}
+	\umlclass[x=2,y=-10]{Produção}{  
+		title : string \\ 
+		year : int \\
+		duration: int \\
+		countries: string[] \\
+		productors: string[]
+	}{}
+\end{tikzpicture}
+
+
 
 % ---
 % Conclusão
@@ -305,17 +317,10 @@ a atender eficientemente os requisitos
 % --- 
 
 
-
-
-
-
-
 % ----------------------------------------------------------
 % ELEMENTOS PÓS-TEXTUAIS
 % ----------------------------------------------------------
 \postextual
-
-
 
 
 % ----------------------------------------------------------
