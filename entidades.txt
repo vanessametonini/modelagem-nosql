@@ -1,56 +1,91 @@
 produção: 
-  título, 
-  ano da produção, 
-  duração, 
-  classificação etária, 
-  países envolvidos na produção, 
-  empresa produtora, 
-  nota média de avaliação por usuarios
-  opiniões de usuarios
+  titulo: string,
+  ano da produção: int, 
+  duração: int, 
+  classificação etária: int, 
+  países envolvidos na produção: paises[] , 
+  empresa produtora: produtores[], 
+  score_by_users: int,
+  opnioes_usuarios: avaliacoes[],
+  cadastrado_por: usuario,
+  descricao: string,
+  tipo: tipo[],
 
-  tipo:
     videoclipe:
-      música,
-      cantor (ou cantores, no caso de um grupo musical)
-      gênero (rock, samba, funk, etc.)
-      diretores
+      música: string,
+      banda: artista
+      gênero: genero
+      diretores: artista[]
       
     filmes:
-      bilheteria (total de espectadores que assistiram o filme)
-      faturamento
-      sequência de outro filme
-      personagens
-      categorias (drama, comédia, romance, musical, etc.), 
-      diretores
-      atores
+      bilheteria: int
+      faturamento: float
+      sequencia: int
+      personagens: artista[]
+      categorias: generos_filme[]
+      diretores: artista[]
+      atores: artista[]
 
     séries:
-      temporadas
-        episódios
-          personagens
-          atores
-          diretores
-      diretores principais
+      qtd_temporadas: int
+      episódios
+        temporada: int
+        personagens: string[]
+        atores: artista[]
+        diretores: artista:
+      diretores_principais: artista[]
 
 artistas 
-  nome, 
-  data de nascimento 
-  local de nascimento, 
-  mini biografia 
-  data de morte
-  tipo: ator, músico, diretor
-    
+  nome: string,
+  data de nascimento: string,
+  local de nascimento: string, 
+  mini biografia: string, 
+  data de morte: string,
+  tipo: tipo_de_artistas[]
+  avaliacoes_usuarios: avaliacao[]
+
+tipo_de_artistas
+  grupo_musical:
+    musico: artistas[]
+  ator,
+  diretor,
+  musico
+
+generos_filme:
+  nome: string
+
+genero_musica
+  nome: string
+
 usuários:
   username
   nome
   email
   avaliacoes feitas
   score
+  comentarios avaliados
 
 avaliacao
+  usuario
   nota
   comentário
+  producao
  
 comentário
+  usuario
   nota
+  avaliacao_id
+
+Produtora
+  nome
+  país
+
+País
+  nome
+  continente
   
+reviews de usuarios:
+  nome
+  producao
+  data
+  comentarios
