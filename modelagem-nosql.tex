@@ -60,11 +60,13 @@
 \usepackage{color}				% Controle das cores
 \usepackage{graphicx}			% Inclusão de gráficos
 \usepackage{microtype} 			% para melhorias de justificação
-
-
+\usepackage{pdfpages}
+\usepackage{lscape}
 \usepackage{tikz}
+\usepackage{geometry}
+\usepackage{pdflscape}
 \usetikzlibrary{shapes.gates.logic.US,trees,positioning,arrows}
-
+\newcommand{\under}{\underline{ }}
 \usetikzlibrary{arrows,automata}
 \usetikzlibrary{positioning}
 \usepackage{tikz-uml}
@@ -294,20 +296,57 @@ a atender eficientemente os requisitos
 % para que se inicie o bookmark na raiz
 % e adiciona espaço de parte no Sumário
 % ---
-\phantompart
+\phantompart 
+\chapter{Diagrama}
 
-\chapter{Diagrama UML}
+\newgeometry{margin=1cm}
+\begin{landscape}
+\thispagestyle{empty} %% Remove header and footer.
+\begin{center}
+	\textbf{Diagrama de classes}
+\end{center}
+	\begin{tikzpicture}
+		\umlclass[x=2,y=-10]{Production}{  
+			title : string \\ 
+			year : numeric \\
+			duration: numeric \\
+			countries: string[] \\
+			productors: productor[] \\
+			score\under by\under users : numeric \\
+			review\under users: evaluation[] \\
+			registered\under by: user \\
+			description: string \\
+			production\under type:   				
+		}{}
 
-\begin{tikzpicture}
-	\umlclass[x=2,y=-10]{Produção}{  
-		title : string \\ 
-		year : int \\
-		duration: int \\
-		countries: string[] \\
-		productors: string[]
-	}{}
-\end{tikzpicture}
+		\umlclass[x=8,y=-10]{Videoclip}{  
+			music : string \\ 
+			band: artist \\
+			genre: genre \\
+			directors: artist[] \\
+		}{}
 
+		\umlclass[x=8,y=-20]{Movie}{  
+			box\under office : numeric \\ 
+			revenues: float \\
+			sequence: numeric \\
+			characters: artist[] \\
+			categories: genre\under movie[]\\
+			directors: artist[] \\
+			actors: artist[]
+		}{}
+
+		\umlclass[x=20,y=-10]{Serie}{  
+			number\under seasons: numeric \\
+		}{}
+
+		\umlclass[x=15,y=-15]{Episode}{  
+			season: numeric \\
+			characters: string[] \\
+		}{}
+	\end{tikzpicture}
+\end{landscape}
+\restoregeometry
 
 
 % ---
