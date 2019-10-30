@@ -1,0 +1,169 @@
+{
+	"producao": {
+		"titulo": "",
+		"resumo": "",
+		"descricao": "",
+		"cadastradoPor": "",
+		"id": "",
+		"ano": 0,
+		"duracao": 0,
+		"classificacaoEtaria": 0,
+		"mediaAvalicao": 0,
+		"paisesProdutores": [""],
+		"produtoras": [
+			{
+				"id": "",
+				"nome": ""
+			}
+		],
+		"avaliacaoDosUsuarios": [
+			{
+				"avaliacaoId": "",
+				"nota": 0
+			}
+		],		
+		"isVideoclipe": false,
+		"videoclipe": {
+			"artista": [""],
+			"genero": "",
+			"diretores": [""]
+		},
+		"isFilme": false,
+		"filme": {
+			"bilheteria": 0,
+			"faturamento": 0,
+			"sequencia": {
+				"ordem": 0,
+				"antecessorId": "",
+				"antecessorNome": ""
+			},
+			"categorias": [
+				{
+					"id": "",
+					"nome": ""
+				}
+			],
+			"diretores": [
+				{
+					"artistaId": "",
+					"nome": ""
+				}
+			],
+			"atores": [
+				{
+					"artistaId": "",
+					"nome": "",
+					"mediaNotaDeAtuacao": 0,
+					"avaliacaoDeAtuacao": [
+						{
+							"id": "",
+							"idUsuario": "",
+							"nota": ""
+						}
+					]
+				}
+			],
+			"personagens": [
+				{
+					"nome": "",
+					"atuadoPor": ""
+				}
+			]
+		},
+		"isSerie": false,
+		"serie": {
+			"qtdTemporadas": 0,
+			"diretoresPrincipais": [""],
+      "episodio": {
+				"numero": 0,
+				"numeroTemporada": 0,
+				"atores": [
+					{
+						"nome": "",
+						"mediaNotaDeAtuacao": 0,
+						"notaDeAtuacao": [
+							{
+								"id": "",
+								"idUsuario": "",
+								"nota": ""
+							}
+						]
+					}
+				],
+				"diretores": [""],
+				"personagens": [
+					{
+						"nome": "",
+						"atuadoPor": ""
+					}
+				]
+			}
+		}
+	},
+	"artista": {
+		"id": "",
+		"nome": "",
+		"miniBiografia": "",
+		"dataFalecimento": "",
+		"dataDeNascimento": "",
+		"localDeNascimento": {
+			"cidade": "",
+			"pais": ""
+		}, 
+		"atuacao": {
+			"musical": false,
+			"cinema": false,
+			"direcao": false,
+			"grupoMusical": false
+		}
+	},
+	"usuario": {
+		"nome": "",
+		"sobrenome": "",
+		"nomeDeUsuario": "",
+		"email": "",
+		"senha": "",
+		"id": "",
+		"cidade": "",
+		"notaPorAvaliacoes": 0,
+		"usuarioPrivilegiado": false,
+		"avaliacoesFeitas": [
+			{
+				"avaliacaoId": ""
+			}
+		]
+	},
+	"produtora": {
+		"id": "",
+		"nome": "",
+		"pais": ""
+	},
+	"generosFilmesSeries": [
+		""
+	],
+	"generosMusicais": [
+		""
+	],
+	"resenhas": {
+		"titulo": "",
+		"data": "",
+		"autor": "",
+		"resumo": "",
+		"conteudo": "",
+		"id": ""
+	},
+	"avaliacaoDosUsuarios": [
+		{
+			"data": "",
+			"nota": 0,
+			"id": "",
+			"usuarioId": "",
+			"producaoId": "",
+			"comentario": {
+				"conteudo": "",
+				"qtdAvaliacoesDoComentario": 0,
+				"nota": 0
+			}
+		}
+	]
+}

@@ -57,25 +57,6 @@ generos_filme:
 genero_musica
   nome: string
 
-usuários:
-  username
-  nome
-  email
-  avaliacoes feitas
-  score
-  comentarios avaliados
-
-avaliacao
-  usuario
-  nota
-  comentário
-  producao
- 
-comentário
-  usuario
-  nota
-  avaliacao_id
-
 Produtora
   nome
   país
@@ -84,8 +65,29 @@ País
   nome
   continente
   
-reviews de usuarios:
+
+usuários:
+  username
   nome
-  producao
-  data
-  comentarios
+  email
+  avaliacoes feitas
+  score
+  comentarios avaliados
+
+  avaliacao
+    usuario
+    nota
+    comentário
+    producao_review
+    data
+  
+  comentário
+    usuario
+    nota
+    avaliacao_id
+
+
+  reviews de usuarios:
+    nome: string;
+    producao: string;
+    data: date;

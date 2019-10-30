@@ -1,0 +1,39 @@
+1) Recuperar dados dos vídeos dirigidos por um dado diretor
+    🚫 diretor.producoes
+
+2) Recuperar dados dos videoclipes de um dado grupo musical
+    🚫 artista.videoclipes
+
+3) Obter os nomes de atores que já atuaram como diretor (ou vice-versa)
+    ✅ artista.atuacao.cinema && artista.atuacao.direcao
+
+4) Obter dados dos filmes que são comédias musicais
+    🚫 genero.filmes
+
+5) Obter todas as sequências (diretas e indiretas) de um dado filme
+    🚫  producao.filme.sequencia.antecessorId
+
+6) Obter os nomes de atores que atuaram em uma dada série
+    ✅ producao.serie.atores[0].nome
+
+7) Obter a nota média de uma produção ou de uma atuação
+    a.  ✅ producao.mediaAvaliacao
+    b.  ✅ producao.atores[0].mediaNotaDeAtuacao
+
+8) Obter a lista de produções mais bem avaliadas na última semana
+    🚫  
+    avaliacaoDosUsuarios.map( avaliacao => {
+        let now = new Date()
+        
+        if(avaliacao.data > ){
+
+        }
+    })
+
+9) Obter os identificadores dos usuários que fizeram os comentários mais bem avaliados no último mês
+     🚫  
+    avaliacaoDosUsuarios.map( avaliacao => {
+        if(data ){
+
+        }
+    })
