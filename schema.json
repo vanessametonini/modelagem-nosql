@@ -4,104 +4,101 @@
 		"resumo": "",
 		"descricao": "",
 		"cadastradoPor": "",
-		"id": "",
 		"ano": 0,
 		"duracao": 0,
 		"classificacaoEtaria": 0,
-		"mediaAvalicao": 0,
+    "mediaAvalicao": 0,
+    "isPopular": false,
 		"paisesProdutores": [""],
-		"produtoras": [
-			{
-				"id": "",
-				"nome": ""
-			}
-		],
+		"produtoras": [""],
 		"avaliacaoDosUsuarios": [
-			{
-				"avaliacaoId": "",
-				"nota": 0
-			}
-		],		
-		"isVideoclipe": false,
-		"videoclipe": {
-			"artista": [""],
-			"genero": "",
-			"diretores": [""]
-		},
-		"isFilme": false,
-		"filme": {
-			"bilheteria": 0,
-			"faturamento": 0,
-			"sequencia": {
-				"ordem": 0,
-				"antecessorId": "",
-				"antecessorNome": ""
-			},
-			"categorias": [
-				{
-					"id": "",
-					"nome": ""
-				}
-			],
-			"diretores": [
-				{
-					"artistaId": "",
-					"nome": ""
-				}
-			],
-			"atores": [
-				{
-					"artistaId": "",
-					"nome": "",
-					"mediaNotaDeAtuacao": 0,
-					"avaliacaoDeAtuacao": [
-						{
-							"id": "",
-							"idUsuario": "",
-							"nota": ""
-						}
-					]
-				}
-			],
-			"personagens": [
-				{
-					"nome": "",
-					"atuadoPor": ""
-				}
-			]
-		},
-		"isSerie": false,
-		"serie": {
-			"qtdTemporadas": 0,
-			"diretoresPrincipais": [""],
-      "episodio": {
-				"numero": 0,
-				"numeroTemporada": 0,
-				"atores": [
-					{
-						"nome": "",
-						"mediaNotaDeAtuacao": 0,
-						"notaDeAtuacao": [
-							{
-								"id": "",
-								"idUsuario": "",
-								"nota": ""
-							}
-						]
-					}
-				],
-				"diretores": [""],
-				"personagens": [
-					{
-						"nome": "",
-						"atuadoPor": ""
-					}
-				]
-			}
-		}
+      {
+        "data": "",
+        "usuarioId": "",
+        "producaoId": "",
+        "nota": 0,
+        "comentario": {
+          "conteudo": "",
+          "nota": 0,
+          "avaliadoPor": [""]
+        }
+      }
+    ],	
+    "tipo": {
+      "videoclipe": {
+        "artista": [""],
+        "genero": "",
+        "diretores": [""]
+      },
+      "filme": {
+        "bilheteria": 0,
+        "faturamento": 0,
+        "sequencia": {
+          "ordem": 0,
+          "antecessorId": "",
+          "sucessorId": ""
+        },
+        "categorias": [
+          {
+            "nome": ""
+          }
+        ],
+        "diretores": [
+          {
+            "artistaId": "",
+            "nome": ""
+          }
+        ],
+        "atores": [
+          {
+            "artistaId": "",
+            "nome": "",
+            "mediaNotaDeAtuacao": 0,
+            "avaliacaoDeAtuacao": [
+              {
+                "idUsuario": "",
+                "nota": ""
+              }
+            ]
+          }
+        ],
+        "personagens": [
+          {
+            "nome": "",
+            "atuadoPor": ""
+          }
+        ]
+      },
+      "serie": {
+        "qtdTemporadas": 0,
+        "diretoresPrincipais": [""],
+        "episodio": {
+          "numero": 0,
+          "numeroTemporada": 0,
+          "atores": [
+            {
+              "nome": "",
+              "mediaNotaDeAtuacao": 0,
+              "notaDeAtuacao": [
+                {
+                  "idUsuario": "",
+                  "nota": ""
+                }
+              ]
+            }
+          ],
+          "diretores": [""],
+          "personagens": [
+            {
+              "nome": "",
+              "atuadoPor": ""
+            }
+          ]
+        }
+      }
+    }
 	},
 	"artista": {
-		"id": "",
 		"nome": "",
 		"miniBiografia": "",
 		"dataFalecimento": "",
@@ -123,7 +120,6 @@
 		"nomeDeUsuario": "",
 		"email": "",
 		"senha": "",
-		"id": "",
 		"cidade": "",
 		"notaPorAvaliacoes": 0,
 		"usuarioPrivilegiado": false,
@@ -134,15 +130,22 @@
 		]
 	},
 	"produtora": {
-		"id": "",
 		"nome": "",
 		"pais": ""
 	},
 	"generosFilmesSeries": [
-		""
+		{
+      "nome": "",
+      "producoes": [""]
+    }
 	],
 	"generosMusicais": [
-		""
+		{
+      "nome": "",
+      "producoes": [
+        ""
+      ]
+    }
 	],
 	"resenhas": {
 		"titulo": "",
@@ -150,20 +153,5 @@
 		"autor": "",
 		"resumo": "",
 		"conteudo": "",
-		"id": ""
-	},
-	"avaliacaoDosUsuarios": [
-		{
-			"data": "",
-			"nota": 0,
-			"id": "",
-			"usuarioId": "",
-			"producaoId": "",
-			"comentario": {
-				"conteudo": "",
-				"qtdAvaliacoesDoComentario": 0,
-				"nota": 0
-			}
-		}
-	]
+	}
 }

@@ -1,5 +1,5 @@
 1) Recuperar dados dos vídeos dirigidos por um dado diretor
-    🚫 diretor.producoes
+    🚫 diretorId.producoes
 
 2) Recuperar dados dos videoclipes de um dado grupo musical
     🚫 artista.videoclipes
