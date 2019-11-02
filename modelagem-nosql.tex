@@ -334,9 +334,9 @@ Para cada produção catalogada nesse BD, deseja-se manter informações básica
 O tipo de banco de dados usado para fazer a proposta da modelagem será o de documentos. Esta escolha é baseada na popularidade do uso pelo mercado e sucesso do mesmo, com implementações hoje já maduras e estabilizadas, como o MongoDB.
 
 \section{Padrões de modelagem NoSQL}
-Pelo fato de um banco de dados de documentos ter a possibilidade de atuar sem um Schema, não significa que ele não poderá ter um Schema. E muito pelo contrário, os autores do MongoDB recomendam fortemente o uso de um Schema para modelar um banco de dados NoSQL.
+Pelo fato de um banco de dados de documentos ter a possibilidade de atuar sem um Schema, não significa que ele não poderá ter um Schema. E muito pelo contrário, os autores do MongoDB recomendam fortemente o uso de um Schema para modelar um banco de dados NoSQL, assim diminuindo os impactos da possível inconsistência de dados.
 
-Com isto, estes mesmos os autores, disponibilizaram uma série de padrões de modelagem do banco de dados no blog, criadas à partir do conhecimento adquirido na consultoria à clientes, representados na figura 1.
+Com isto, estes mesmos os autores, disponibilizaram uma série de padrões de modelagem do banco de dados no blog do MongoDB, criadas à partir do conhecimento adquirido na consultoria à clientes, representados na figura 1.
 
 \begin{tikzpicture}
 	\pgftext{\includegraphics[width=300pt]{./imagens/patternsmatrix.png}}
@@ -345,11 +345,11 @@ Com isto, estes mesmos os autores, disponibilizaram uma série de padrões de mo
 Os padrões propostos não são excludentes, ou seja, é possível implementar mais de um padrão em uma solução. Portanto escolhi 4 destes padrões que contribuem a necessidade de uso dos dados com base nos requisitos funcionais. São eles:
 
 \begin{enumerate}
-  \item Attribute Pattern (padrão de atributos): diminuí o indexamento de atributos parecidos, transportando-os para uma estrutura de lista;
-  \item Polymorphic Pattern (padrão polimórfico): o mesmo documento tem diferentes formatos porém compartilha de muitos atributos em comum. Então agrupa-se os documentos com base nas "queries" que necessitamos fazer. Com isto, ameniza a necessidade de fazer "joins" complexos;
-  \item Outlier Pattern (padrão fora da curva): usado quando o fator "popularidade" acontece, e um documento tem seu tamanho aumentado considerávelmente (por exemplo 16Mb). Para isto, cria-se um atributo "flag" que sinalizará este fator em determinado documento e transportará os dados excedentes para um ou mais documentos (estes chamados de "overflow documents"), deixando apenas um número limitado no documento principal. Este padrão evita mudar todo um Schema por causa de um fato isolado;
-  \item The Computed Pattern (o padrão computado): quando temos dados que precisam ser computados repetitivamente, ou a partir de outros dados. Também serve para quando há mais leitura do que escrito de dados. E bom para quando precisa ser montada listas como "100 melhores ...";
-  \item Subset Pattern (padrão subconjunto): Quando o alocamento de memória RAM é alto devido ao tamanho dos documentos. Resulta em dados sendo removidos da memória RAM criando um subconjunto de dados menos usados (similar ao Outlier Pattern).
+  \item \textbf{Attribute Pattern} (padrão de atributos): diminuí o indexamento de atributos parecidos, transportando-os para uma estrutura de lista;
+  \item \textbf{Polymorphic Pattern} (padrão polimórfico): o mesmo documento tem diferentes formatos porém compartilha de muitos atributos em comum. Então agrupa-se os documentos com base nas "queries" que necessitamos fazer. Com isto, ameniza a necessidade de fazer "joins" complexos;
+  \item \textbf{Outlier Pattern} (padrão fora da curva): usado quando o fator "popularidade" acontece, e um documento tem seu tamanho aumentado considerávelmente (por exemplo 16Mb). Para isto, cria-se um atributo "flag" que sinalizará este fator em determinado documento e transportará os dados excedentes para um ou mais documentos (estes chamados de "overflow documents"), deixando apenas um número limitado no documento principal. Este padrão evita mudar todo um Schema por causa de um fato isolado;
+  \item \textbf{The Computed Pattern} (o padrão computado): quando temos dados que precisam ser computados repetitivamente, ou a partir de outros dados. Também serve para quando há mais leitura do que escrito de dados. E bom para quando precisa ser montada listas como "100 melhores ...";
+  \item \textbf{Subset Pattern} (padrão subconjunto): Quando o alocamento de memória RAM é alto devido ao tamanho dos documentos. Resulta em dados sendo removidos da memória RAM criando um subconjunto de dados menos usados (similar ao Outlier Pattern).
 \end{enumerate}
 
 % ---
@@ -375,84 +375,89 @@ O modelo
 	\textbf{Diagrama de entidades}
 \end{center}
 	\begin{tikzpicture}
-		\umlclass[x=2,y=-10]{Producao}{  
-			titulo: string \\ 
-			resumo: string \\ 
-			descricao: string \\
-			cadastradoPor: string \\
-			genero: string \\
-			videoTrailer: string \\
-			ano: numeric \\
-			duracao: numeric \\
-			classificacaoEtaria: numeric \\
-			mediaAvaliacao: numeric \\
-			popular: boolean \\
-			paisesProdutoresId: string[] \\
-			produtorasId: string[] \\
-			estreandoArtistaId: string[] \\
-			diretoresId: string[]\\
-			tipo: object[] \\
-			avaliacaoDosUsuarios: object[]
-		}{}
 
-		\umlclass[x=8,y=-20]{Filme}{  
-			bilheteria: numeric \\ 
-			faturamento: numeric \\ 
-			sequencia: object \\ 
-			personagens: object[] \\
-			avaliacaoArtista: object[] \\
-		}{}
-
-		\umlclass[x=8,y=-20]{Sequencia}{  
-			ordem: numeric \\ 
-			antecessorId: string \\ 
-			sucessorId: string \\ 
-		}{}
-
-		\umlclass[x=8,y=-20]{Personagens}{  
-			nome: string \\ 
-			atuadoPorId: string \\ 
-		}{}
-
-		\umlclass[x=8,y=-20]{AvaliacaoArtista}{  
-			artistaId: string \\ 
-			notaMedia: numeric \\ 
-			avaliacao: object \\ 
-		}{}
-
-		\umlclass[x=8,y=-20]{Avaliacao}{  
-			usuarioId: string \\ 
-			nota: numeric \\ 
-		}{}
-
-		\umlclass[x=20,y=-10]{Serie}{  
-			qtdTemporadas: numeric \\
-			personagens: object[] \\
-			episodios: object[]
-		}{}
-
-		\umlclass[x=15,y=-15]{Episodio}{  
-			numero: numeric \\
-			temporada: numeric \\
-			atoresConvidadosId: string[] \\
-			diretoresConvidadosId: string[] \\
-			personagensConvidados: object[] \\
-			avaliacaoArtista: object[] \\
-		}{}
-
-		\umlclass[x=15,y=-15]{AvaliacaoDosUsuarios}{  
-			data: string \\
-			usuarioId: string \\
-			producaoId: string \\
-			nota: numeric \\
-			comentario: object
-		}{}
-
-		\umlclass[x=15,y=-15]{Comentario}{  
-			conteudo: string \\
-			nota: numeric \\
-			avaliacoesComentarioId: string[]
-		}{}
+	% entidades
+		% pacote producao
+		\begin{umlpackage}[x=0, y=0]{Producao}
+			\umlclass[x=0,y=-10]{Producao}{  
+				titulo: string \\ 
+				resumo: string \\ 
+				descricao: string \\
+				cadastradoPor: string \\
+				genero: string \\
+				videoTrailer: string \\
+				ano: numeric \\
+				duracao: numeric \\
+				classificacaoEtaria: numeric \\
+				mediaAvaliacao: numeric \\
+				popular: boolean \\
+				paisesProdutoresId: string[] \\
+				produtorasId: string[] \\
+				estreandoArtistaId: string[] \\
+				diretoresId: string[]\\
+				tipo: object[] \\
+				avaliacaoDosUsuarios: object[]
+			}{}
+	
+			\umlclass[x=1,y=10]{Filme}{  
+				bilheteria: numeric \\ 
+				faturamento: numeric \\ 
+				sequencia: object \\ 
+				personagens: object[] \\
+				avaliacaoArtista: object[] \\
+			}{}
+	
+			\umlclass[x=0,y=10]{Sequencia}{  
+				ordem: numeric \\ 
+				antecessorId: string \\ 
+				sucessorId: string \\ 
+			}{}
+	
+			\umlclass[x=100,y=-10]{Personagens}{  
+				nome: string \\ 
+				atuadoPorId: string \\ 
+			}{}
+	
+			\umlclass[x=8,y=-20]{AvaliacaoArtista}{  
+				artistaId: string \\ 
+				notaMedia: numeric \\ 
+				avaliacao: object \\ 
+			}{}
+	
+			\umlclass[x=8,y=-20]{Avaliacao}{  
+				usuarioId: string \\ 
+				nota: numeric \\ 
+			}{}
+	
+			\umlclass[x=20,y=-10]{Serie}{  
+				qtdTemporadas: numeric \\
+				personagens: object[] \\
+				episodios: object[]
+			}{}
+	
+			\umlclass[x=15,y=-15]{Episodio}{  
+				numero: numeric \\
+				temporada: numeric \\
+				atoresConvidadosId: string[] \\
+				diretoresConvidadosId: string[] \\
+				personagensConvidados: object[] \\
+				avaliacaoArtista: object[] \\
+			}{}
+	
+			\umlclass[x=15,y=-15]{AvaliacaoDosUsuarios}{  
+				data: string \\
+				usuarioId: string \\
+				producaoId: string \\
+				nota: numeric \\
+				comentario: object
+			}{}
+	
+			\umlclass[x=15,y=-15]{Comentario}{  
+				conteudo: string \\
+				nota: numeric \\
+				avaliacoesComentarioId: string[]
+			}{}
+		\end{umlpackage}
 
 		\umlclass[x=15,y=-15]{Artista}{  
 			nome: string \\
@@ -504,6 +509,9 @@ O modelo
 			resumo: string \\
 			conteudo: string \\
 		}
+
+		% relacionamentos
+		% \umlunicompo[arg=z,mult=1..∗,pos=0.8,angle1=−90,angle2=−140]{Producao}{Filme} 
 
 	\end{tikzpicture}
 \end{landscape}
