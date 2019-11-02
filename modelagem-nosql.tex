@@ -469,7 +469,7 @@ O modelo
 			cinema: boolean \\
 			direcao: boolean \\
 			grupoMusical: boolean \\
-		}{}
+		}{} 
 
 		\umlclass[x=15,y=-15]{Usuario}{  
 			nome: string \\
@@ -479,7 +479,7 @@ O modelo
 			senha: string \\
 			cidade: string \\
 			notaPorAvaliacoes: numeric \\
-			usuarioPrivilegiado: boolean \\
+			usuarioPrivilegiado: boolean \\ 
 			avaliacoesFeitasId: string[] \\
 		}{}
 
@@ -504,6 +504,8 @@ O modelo
 			resumo: string \\
 			conteudo: string \\
 		}
+
+		\umlassoc{Producao}{Filme}
 
 	\end{tikzpicture}
 \end{landscape}
