@@ -331,7 +331,7 @@ Para cada produção catalogada nesse BD, deseja-se manter informações básica
 
 \section{Escolha do tipo do banco de dados}
 
-O tipo de banco de dados usado para fazer a proposta da modelagem será o de documentos. Esta escolha é baseada na popularidade do uso pelo mercado e sucesso do mesmo, com implementações hoje já maduras e estabilizadas, como o MongoDB.
+O tipo de banco de dados usa do para fazer a proposta da modelagem será o de documentos. Esta escolha é baseada na popularidade do uso pelo mercado e sucesso do mesmo, com implementações hoje já maduras e estabilizadas, como o MongoDB.
 
 \section{Padrões de modelagem NoSQL}
 Pelo fato de um banco de dados de documentos ter a possibilidade de atuar sem um Schema, não significa que ele não poderá ter um Schema. E muito pelo contrário, os autores do MongoDB recomendam fortemente o uso de um Schema para modelar um banco de dados NoSQL, assim diminuindo os impactos da possível inconsistência de dados.
@@ -378,8 +378,7 @@ O modelo
 
 	% entidades
 		% pacote producao
-		\begin{umlpackage}[x=0, y=0]{Producao}
-			\umlclass[x=0,y=-10]{Producao}{  
+			\umlclass[x=0,y=1]{Producao}{  
 				titulo: string \\ 
 				resumo: string \\ 
 				descricao: string \\
@@ -395,47 +394,47 @@ O modelo
 				produtorasId: string[] \\
 				estreandoArtistaId: string[] \\
 				diretoresId: string[]\\
-				tipo: object[] \\
+				tipo: object<Filme | Serie> \\
 				avaliacaoDosUsuarios: object[]
 			}{}
 	
-			\umlclass[x=1,y=10]{Filme}{  
+			\umlclass[x=6,y=0]{Filme}{  
 				bilheteria: numeric \\ 
 				faturamento: numeric \\ 
 				sequencia: object \\ 
 				personagens: object[] \\
 				avaliacaoArtista: object[] \\
 			}{}
-	
-			\umlclass[x=0,y=10]{Sequencia}{  
-				ordem: numeric \\ 
-				antecessorId: string \\ 
-				sucessorId: string \\ 
-			}{}
-	
-			\umlclass[x=100,y=-10]{Personagens}{  
-				nome: string \\ 
-				atuadoPorId: string \\ 
-			}{}
-	
-			\umlclass[x=8,y=-20]{AvaliacaoArtista}{  
-				artistaId: string \\ 
-				notaMedia: numeric \\ 
-				avaliacao: object \\ 
-			}{}
-	
-			\umlclass[x=8,y=-20]{Avaliacao}{  
-				usuarioId: string \\ 
-				nota: numeric \\ 
-			}{}
-	
-			\umlclass[x=20,y=-10]{Serie}{  
+
+			\umlclass[x=6,y=-5]{Serie}{  
 				qtdTemporadas: numeric \\
 				personagens: object[] \\
 				episodios: object[]
 			}{}
 	
-			\umlclass[x=15,y=-15]{Episodio}{  
+			\umlclass[x=6,y=4]{Sequencia}{  
+				ordem: numeric \\ 
+				antecessorId: string \\ 
+				sucessorId: string \\ 
+			}{}
+	
+			\umlclass[x=11,y=0]{Personagens}{  
+				nome: string \\ 
+				atuadoPorId: string \\ 
+			}{}
+	
+			\umlclass[x=14,y=4]{AvaliacaoArtista}{  
+				artistaId: string \\ 
+				notaMedia: numeric \\ 
+				avaliacao: object \\ 
+			}{}
+	
+			\umlclass[x=18,y=4]{Avaliacao}{  
+				usuarioId: string \\ 
+				nota: numeric \\ 
+			}{}
+	
+			\umlclass[x=13,y=-5.5]{Episodio}{  
 				numero: numeric \\
 				temporada: numeric \\
 				atoresConvidadosId: string[] \\
@@ -444,7 +443,7 @@ O modelo
 				avaliacaoArtista: object[] \\
 			}{}
 	
-			\umlclass[x=15,y=-15]{AvaliacaoDosUsuarios}{  
+			\umlclass[x=0,y=-6]{AvaliacaoDosUsuarios}{  
 				data: string \\
 				usuarioId: string \\
 				producaoId: string \\
@@ -452,14 +451,13 @@ O modelo
 				comentario: object
 			}{}
 	
-			\umlclass[x=15,y=-15]{Comentario}{  
+			\umlclass[x=0,y=-10]{Comentario}{  
 				conteudo: string \\
 				nota: numeric \\
 				avaliacoesComentarioId: string[]
 			}{}
-		\end{umlpackage}
 
-		\umlclass[x=15,y=-15]{Artista}{  
+		\umlclass[x=18,y=-1]{Artista}{  
 			nome: string \\
 			miniBiografia: string \\
 			dataDeObito: string \\
@@ -469,14 +467,14 @@ O modelo
 			atuacaoTipo: object \\
 		}{}
 
-		\umlclass[x=15,y=-15]{AtuacaoTipo}{  
+		\umlclass[x=23,y=-1]{AtuacaoTipo}{  
 			musical: boolean \\
 			cinema: boolean \\
 			direcao: boolean \\
 			grupoMusical: boolean \\
 		}{} 
 
-		\umlclass[x=15,y=-15]{Usuario}{  
+		\umlclass[x=6,y=-10]{Usuario}{  
 			nome: string \\
 			sobrenome: string \\
 			nomeDeUsuario: string \\
@@ -488,12 +486,12 @@ O modelo
 			avaliacoesFeitasId: string[] \\
 		}{}
 
-		\umlclass[x=15,y=-15]{Produtora}{  
+		\umlclass[x=11,y=-10]{Produtora}{  
 			nome: string \\
 			pais: string \\
 		}{}
 
-		\umlclass[x=15,y=-15]{Generos}{  
+		\umlclass[x=16,y=-10]{Generos}{  
 		}{
 			nome: string \\ 
 			producoesId: string[] \\ 
@@ -501,7 +499,7 @@ O modelo
 			visual: boolean \\ 
 		}
 
-		\umlclass[x=15,y=-15]{Resenhas}{  
+		\umlclass[x=22,y=-10]{Resenhas}{  
 		}{
 			titulo: string \\
 			data: string \\
@@ -510,7 +508,24 @@ O modelo
 			conteudo: string \\
 		}
 
-		\umlassoc{Producao}{Filme}
+		\umlunicompo[geometry=-|-]{Producao}{Filme} 
+		\umlunicompo[geometry=-|-]{Producao}{Serie}
+		\umlunicompo[mult1=1,mult2=*]{Producao}{AvaliacaoDosUsuarios}
+		
+		\umlassoc{AvaliacaoDosUsuarios}{Comentario}
+
+		\umlassoc{Filme}{Sequencia}
+		\umlassoc{Filme}{Personagens}
+		\umlassoc{Filme}{AvaliacaoArtista}
+		\umlassoc{AvaliacaoArtista}{Avaliacao}
+		
+		\umlassoc{Serie}{Personagens}
+		\umlassoc{Serie}{Episodio}
+		\umlassoc{Episodio}{Personagens}
+		\umlassoc{Episodio}{AvaliacaoArtista}
+
+		\umlassoc{Artista}{AtuacaoTipo}
+
 
 	\end{tikzpicture}
 \end{landscape}
