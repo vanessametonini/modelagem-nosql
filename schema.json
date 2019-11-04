@@ -11,7 +11,7 @@
 		"ano": 0,
 		"duracao": 0,
 		"classificacaoEtaria": 0,
-    "mediaAvalicao": 0,
+    "mediaAvaliacao": 0,
     "popular": false,
 		"paisesProdutores": [""],
 		"produtorasId": [""],
@@ -25,8 +25,13 @@
         "nota": 0,
         "comentario": {
           "conteudo": "",
-          "nota": 0,
-          "avaliacoesComentarioId": [""] 
+          "mediaAvaliacao": 0,
+          "avaliacao": [
+            {
+              "usuarioId": "",
+              "nota": ""
+            }
+          ]
         }
       }
     ],
@@ -47,7 +52,7 @@
       "avaliacaoArtista": [
         {
           "artistaId": "",
-          "notaMedia": 0,
+          "mediaAvaliacao": 0,
           "avaliacao": [
             {
               "usuarioId": "",
@@ -119,7 +124,7 @@
 		"email": "",
 		"senha": "",
 		"cidade": "",
-		"notaPorAvaliacoes": 0,
+		"mediaAvaliacao": 0,
 		"usuarioPrivilegiado": false,
 		"avaliacoesFeitasId": [""]
 	},

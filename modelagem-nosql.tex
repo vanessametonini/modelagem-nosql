@@ -126,7 +126,8 @@
 \tipotrabalho{Exercício}
 % O preambulo deve conter o tipo do trabalho, o objetivo, 
 % o nome da instituição e a área de concentração 
-\preambulo{Proposta de modelagem para uma banco de dados NoSQL baseado no modelo de dados de agregados.}
+\preambulo{Trabalho apresentado para a disciplina MAC5861 – Modelagem de Banco de Dados. Proposta de modelagem para uma banco de dados NoSQL baseado no modelo de dados de agregados. }
+\orientador{Profª. Kelly Rosa Braghetto}
 % ---
  
 % ---
@@ -352,7 +353,7 @@ Em um \textbf{MDN}, as relações entre entidades são descritas usando referên
 
 Além deste guia de modelagem básica, os autores do blog do MongoDB, disponibilizaram uma série de artigos sobre padrões de modelagem do banco de dados NoSQL. Um total de 12 padrões foram criados à partir do conhecimento adquirido na consultoria à clientes, é possível consultá-los rapidamente por uma matriz com o contexto de aplicação dos mesmos na figura \ref{plot:patternmatrix} \cite{mongoblogpatterns}.
 
-Os padrões propostos não são excludentes, ou seja, é possível implementar mais de um padrão em uma solução. Portanto escolheu-se 4 destes padrões que contribuem à necessidade de uso dos dados com base nos requisitos funcionais. São eles:
+Os padrões propostos não são excludentes, ou seja, é possível implementar mais de um padrão em uma solução. Portanto escolheu-se 4 destes padrões que contribuem à necessidade do uso dos dados com base nos requisitos funcionais. São eles:
 
 \begin{enumerate}
   \item \textbf{\textit{Attribute Pattern}} (padrão de atributos): diminuí o indexamento de atributos parecidos, transportando-os para uma estrutura de lista;
@@ -369,6 +370,14 @@ Os padrões propostos não são excludentes, ou seja, é possível implementar m
 	\label{plot:patternmatrix}
 \end{figure}
 
+\section{Unindo dados}
+Mesmo sendo um banco de dados não relacional, em algumas situações se faz necessário o cruzamento de dados que estão em documentos diferentes, porém que guardam referência de um para o outro. Para isto o MongoDB oferece o \textbf{\textit{Aggregation Framework}} (AF). Com ele dados são transformados em etapas, passando por um \textit{pipeline}, onde o resultado de um estágio é o insumo (entrada) do estágio seguinte \cite{views-materializadas}. Neste \textit{pipeline}, podem ser utilizados um ou mais operadores de transformação de dados para obter o resultado necessário, com isto é possível atender muitos dos requisitos funcionais solicitados.
+
+\section{Persistência Poliglota}
+Para atender a demanda de buscas recursivas, como obter todas as sequências dos filmes, entre outras, será necessário usar um banco de dados de grafos. Porém para isto não é necessário manter dados em diferentes tipos de armazenamento. Para caso do banco de dados orientado a grafos \textbf{Neo4j}, é possível usar um conector do MongoDB e um "sincronizador" de base de dados, onde a partir dos dados enviados do MongoDB o Neo4j gera sua base, para que consultas com grafos sejam feitas \cite{neo4jMongo}.
+
+Em \textit{Graph Operations with MongoDB}, \cite{graphoperator} demonstra como devemos modelar um banco de dados NoSQL com MongoDB com a intenção de realizar operações do AF que contém operadores para retornar grafos como o \verb+$graphLookup+. De acordo com o autor, o AF do MongoDB atende 75\% dos casos de operações com grafos.
+
 % ---
 % Finaliza a parte no bookmark do PDF
 % para que se inicie o bookmark na raiz
@@ -377,9 +386,11 @@ Os padrões propostos não são excludentes, ou seja, é possível implementar m
 \phantompart 
 \chapter{Apresentação do modelo}
 
+\section[Modelos]{Modelos}
+
 Para este caso, adotou-se uma modelagem mais próxima ao MDE para os documentos que terão mais relacionamentos como \textbf{produção artística} e \textbf{artistas}. Para dados com menos relações, foi criados documentos separados para auxilio da aplicação que irá preencher os documentos maiores a partir da referência dos dados destes documentos.
 
-Foram mapeados 6 entidades que representarão os documentos de primeiro nível:
+Foram mapeados 6 entidades que representarão os documentos de primeiro nível, abaixo segue uma descrição curta de cada uma:
 
 \begin{enumerate}
 	\item \textbf{Produção}: contém os dados de uma produção artística, e as avaliações recebidas dos usuários;
@@ -390,13 +401,39 @@ Foram mapeados 6 entidades que representarão os documentos de primeiro nível:
 	\item \textbf{Resenhas}: contém o conteúdo criado por usuários privilegiados.
 \end{enumerate}
 
-\section[]{Detalhes}
-\subsubsection{Produção}
-A entidade Produção representa seu respectivo documento no banco de dados, para a mesma, usou-se o padrão polimórfico, onde existe a flexibilidade de preencher o documento com os dados de um filme, ou uma série, ou caso ambos atributos não sejam preenchidos, a produção artística trata-se de um videoclipe. O polimorfismo deste documento está representado pelo retângulo lilás.
+\section[Descrição]{Descrição da modelagem}
 
-Observação: As chaves primárias artificiais são geradas automaticamente pelo sistema de banco de dados no momento em documento é feito. Estes documentos recebem uma chave com o nome ``{\under}id'' onde esta já vem as regras de unicidade, e uma hash é gerada pela função \verb+ObjectId()+, estas foram omitidas de declaração no Diagrama de Entidades.
+Nesta sessão, a descrição das entidades mais complexas são detalhadas, e também observações adotadas nas demais entidades.
 
+\subsection{Produção}
+A entidade \textbf{Produção} representa seu respectivo documento no banco de dados, para a mesma, usou-se o padrão polimórfico, onde existe a flexibilidade de preencher o documento com os dados de um filme, ou uma série, ou caso ambos atributos não sejam preenchidos, os atributos contemplam os requisitos para um videoclipe. Porém é declarado o atributo \verb+tipo+ para armazenar o tipo de produção. O polimorfismo deste documento está representado pelo retângulo lilás no Diagrama de Entidades.
 
+A entidade \textbf{Produção} do tipo \textbf{Filme} contém um atributo \verb+sequencia+, este representa a sequência de um série de filmes. Para que possa ser solicitado a sequência de um filme é armazenado a ordem que este filme está na sequência, além das referências do seu filme antecessor e sucessor, todos os dados da sequência são opcionais, sendo necessário atualizar por aplicação caso um sucessor seja inserido depois.
+
+Tanto em \textbf{Filme} quanto em uma \textbf{Série} o atributo \verb+personagens+ armazena uma lista de documentos representados pela entidade \textbf{Personagens}, que por sua vez contém o nome dos personagens e a referência a seu respectivo artista.
+
+Em \textbf{Filme} e em um \textbf{Episódio} de uma \textbf{Série}, o atributo \verb+avaliacaoArtista+  armazena uma lista de subdocumentos tendo seu modelo representado pela entidade \textbf{AvaliacaoArtista}, onde armazena os dados de avaliação da atuação dos artistas nesta produção, feitas pelos usuários do site. Cada avaliação de um artista é armazenada no atributo \verb+avaliacao+, que por sua vez recebe uma lista de documentos do tipo \textbf{Avaliacao} com a referência do usuário e a nota da atuação do artista. A referência da avaliação também deve ser gravada no documento do usuário autor da avaliação.
+
+Na entidade \textbf{Episódio}, está previsto o cenário de artistas convidados, possibilitando que estes também possam receber avaliações da sua participação especial.
+
+Ainda em uma \textbf{Produção}, é possível receber avaliações detalhadas dos usuários com um comentário. Portanto no atributo \verb+avaliacaoDosUsuarios+ é armazenado uma lista de documentos do tipo \textbf{AvaliacaoDosUsuarios}. O comentário de uma avaliação pode receber uma nota também, portanto um comentário é um subdocumento do tipo \textbf{Comentario}, onde guarda no atributo \verb+avaliacao+ que contém uma lista de documentos do tipo \textbf{Avaliacao}.
+
+O atributo \verb+popular+ de uma \textbf{Produção} faz um papel de \textit{flag}, ou sinalização, se a determinada produção é popular, isto é um indicador para adotar o padrão fora da curva, para armazenar um numero menor de avaliações e o maior volume em um documento separado.
+
+\subsection{Artista}
+O documento que armazenará os detalhes dos artistas, bandas e diretores é o \textbf{Artista}. Este documento contém atributos simples, apenas uma observação que em seu subdocumento \verb+atuacaoTipo+ é definido se um artista é multifacetado ou uma grupo musical, seguindo o padrão de atributos.
+
+\subsection{Atributos de média de nota}
+Os atributos das entidades que armazenarão uma média de nota de avaliação das produções artísticas ou de artistas, serão preenchidos de maneira computada por uma função do banco de dados, fazendo o \verb+reduce+ (soma) de todas as notas e dividindo pelo tamanho da lista que armazena estas notas. Esta função deverá ser disparada a cada nova avaliação feita. Esta possibilidade se dá pela implementação do padrão computado.
+
+\subsection{Chaves primárias}
+As chaves primárias artificiais são geradas automaticamente pelo sistema de banco de dados no momento em que o documento é inserido. Estes documentos recebem uma chave com o nome ``{\under}id'' onde esta já vem as regras de unicidade, e uma hash é gerada pela função \verb+ObjectId()+, estas chaves foram omitidas de declaração no Diagrama de Entidades.
+
+\subsection{Demais entidades} 
+As demais entidades são simples, e algumas, como \textbf{Produtora} e \textbf{Generos} são para ajudar a manter uma consistência de dados no preenchimento dos campos de outras entidades.
+
+%\textbf{}
+%\verb++
 
 \newgeometry{margin=1cm}
 \begin{landscape}
@@ -405,7 +442,7 @@ Observação: As chaves primárias artificiais são geradas automaticamente pelo
 \begin{center}
 	\textbf{Diagrama de Entidades}
 \end{center}
-	\begin{tikzpicture}
+\begin{tikzpicture}
 
 	% entidades
 		% pacote producao
@@ -461,7 +498,7 @@ Observação: As chaves primárias artificiais são geradas automaticamente pelo
 
 		\umlclass[x=18,y=0]{AvaliacaoArtista}{  
 			artistaId: string \\ 
-			notaMedia: int32 \\ 
+			mediaAvaliacao: int32 \\ 
 			avaliacao: document[] \\ 
 		}{}
 
@@ -490,8 +527,8 @@ Observação: As chaves primárias artificiais são geradas automaticamente pelo
 
 		\umlclass[x=0,y=-12.5]{Comentario}{  
 			conteudo: string \\
-			nota: int32 \\
-			avaliacoesComentarioId: string[]
+			mediaAvaliacao: int32 \\
+			avaliacao: document[]
 		}{}
 	
 		\umlclass[x=22,y=-4]{Artista}{  
@@ -518,7 +555,7 @@ Observação: As chaves primárias artificiais são geradas automaticamente pelo
 			email: string \\
 			senha: string \\
 			cidade: string \\
-			notaPorAvaliacoes: int32 \\
+			mediaAvaliacao: int32 \\
 			usuarioPrivilegiado: boolean \\ 
 			avaliacoesFeitasId: string[] \\
 		}{}
@@ -566,14 +603,6 @@ Observação: As chaves primárias artificiais são geradas automaticamente pelo
 \end{landscape}
 \restoregeometry
 
-
-% ---
-% Conclusão
-% ---
-\chapter{Conclusão}
-% --- 
-
-
 % ----------------------------------------------------------
 % ELEMENTOS PÓS-TEXTUAIS
 % ----------------------------------------------------------
@@ -584,9 +613,13 @@ Observação: As chaves primárias artificiais são geradas automaticamente pelo
 % Referências bibliográficas
 % ----------------------------------------------------------
 
-% \nocite{babel}
-\bibliography{modelagem-nosql}
 
+\nocite{MFnosql}
+%\nocite{MFpolyglot}
+\nocite{graphoperator}
+\nocite{DMleftJoin}
+\nocite{mongopolyglot}
+\bibliography{modelagem-nosql}
 
 
 
