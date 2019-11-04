@@ -1,17 +1,17 @@
 1) Recuperar dados dos vídeos dirigidos por um dado diretor
-    🚫 diretorId.producoes
+    ✅ diretorId.atuouEmId
 
 2) Recuperar dados dos videoclipes de um dado grupo musical
-    🚫 artista.videoclipes
+    ✅ artistaId.atuouEmId
 
 3) Obter os nomes de atores que já atuaram como diretor (ou vice-versa)
-    ✅ artista.atuacao.cinema && artista.atuacao.direcao
+    ✅ artistaId.atuacao.cinema && artistaId.atuacao.direcao
 
 4) Obter dados dos filmes que são comédias musicais
-    🚫 genero.filmes
+    ✅ generoId.producoesId
 
 5) Obter todas as sequências (diretas e indiretas) de um dado filme
-    🚫  producao.filme.sequencia.antecessorId
+    [consulta recursiva]✅🚫  producao.filme.sequencia.antecessorId
 
 6) Obter os nomes de atores que atuaram em uma dada série
     ✅ producao.serie.atores[0].nome

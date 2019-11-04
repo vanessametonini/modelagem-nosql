@@ -2,83 +2,21 @@
 	"producao": {
 		"titulo": "",
 		"resumo": "",
-		"descricao": "",
+		"enredo": "",
     "cadastradoPor": "",
-    "genero": "",
+    "generos": [""],
     "videoTrailer": "",
+    "capa": "",
+    "tipo": "",
 		"ano": 0,
 		"duracao": 0,
 		"classificacaoEtaria": 0,
     "mediaAvalicao": 0,
     "popular": false,
-		"paisesProdutoresId": [""],
+		"paisesProdutores": [""],
 		"produtorasId": [""],
     "estreandoArtistaId": [""],
     "diretoresId": [""],
-    "tipo": {
-      "filme": {
-        "bilheteria": 0,
-        "faturamento": 0,
-        "sequencia": {
-          "ordem": 0,
-          "antecessorId": "",
-          "sucessorId": ""
-        },
-        "personagens": [
-          {
-            "nome": "",
-            "atuadoPorId": ""
-          }
-        ],
-        "avaliacaoArtista": [
-          {
-            "artistaId": "",
-            "notaMedia": 0,
-            "avaliacao": [
-              {
-                "usuarioId": "",
-                "nota": ""
-              }
-            ]
-          }
-        ]
-      },
-      "serie": {
-        "qtdTemporadas": 0,
-        "personagens": [
-          {
-            "nome": "",
-            "atuadoPor": ""
-          }
-        ],
-        "episodios": [
-          {
-            "numero": 0,
-            "temporada": 0,
-            "atoresConvidadosId": [""],
-            "diretoresConvidadosId": [""],
-            "personagensConvidados": [
-              {
-                "nome": "",
-                "atuadoPorId": ""
-              }
-            ],
-            "avaliacaoArtista": [
-              {
-                "artistaId": "",
-                "notaMedia": 0,
-                "avaliacao": [
-                  {
-                    "usuarioId": "",
-                    "nota": ""
-                  }
-                ]
-              }
-            ]
-          }
-        ]
-      }
-    },
     "avaliacaoDosUsuarios": [
       {
         "data": "",
@@ -91,7 +29,74 @@
           "avaliacoesComentarioId": [""] 
         }
       }
-    ]
+    ],
+    "filme": {
+      "bilheteria": 0,
+      "faturamento": 0,
+      "sequencia": {
+        "ordem": 0,
+        "antecessorId": "",
+        "sucessorId": ""
+      },
+      "personagens": [
+        {
+          "nome": "",
+          "atuadoPorId": ""
+        }
+      ],
+      "avaliacaoArtista": [
+        {
+          "artistaId": "",
+          "notaMedia": 0,
+          "avaliacao": [
+            {
+              "usuarioId": "",
+              "nota": ""
+            }
+          ]
+        }
+      ]
+    },
+    "serie": {
+      "qtdTemporadas": 0,
+      "personagens": [
+        {
+          "nome": "",
+          "atuadoPor": ""
+        }
+      ],
+      "episodios": [
+        {
+          "numero": 0,
+          "temporada": 0,
+          "temporadaNome": "",
+          "atoresConvidadosId": [
+            ""
+          ],
+          "diretoresConvidadosId": [
+            ""
+          ],
+          "personagensConvidados": [
+            {
+              "nome": "",
+              "atuadoPorId": ""
+            }
+          ],
+          "avaliacaoArtista": [
+            {
+              "artistaId": "",
+              "notaMedia": 0,
+              "avaliacao": [
+                {
+                  "usuarioId": "",
+                  "nota": ""
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
 	},
 	"artista": {
 		"nome": "",
@@ -126,15 +131,14 @@
 		{
       "nome": "",
       "producoesId": [""],
-      "musical": false,
-      "visual": false
+      "tipo": ""
     }
 	],
 	"resenhas": {
 		"titulo": "",
 		"data": "",
-		"autorId": "",
+		"usuarioAutorId": "",
 		"resumo": "",
-		"conteudo": "",
+		"conteudo": ""
 	}
 }
